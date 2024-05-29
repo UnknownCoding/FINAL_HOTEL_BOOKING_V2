@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.mainComponent{
+  @apply max-w-7xl px-[1rem] md:px-[10rem]
+}
