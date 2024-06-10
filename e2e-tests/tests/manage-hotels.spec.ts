@@ -49,3 +49,23 @@ test("should allow user to add a hotel",async({page})=>{
 
 
 })
+
+test("should display hotels", async ({page})=>{
+    await page.goto(`${UI_URL}/my-hotels`);
+
+    await expect(page.getByText("Dublin Getaways")).toBeVisible();
+
+    await expect(page.getByText('Lorem ipsum dolor sit amet, consectetur')).toBeVisible();
+
+    await expect(page.getByText("Dublin, Ireland")).toBeVisible();
+    await expect(page.getByText("All Inclusive")).toBeVisible();
+    await expect(page.getByText("AED 119 per night")).toBeVisible();
+    await expect(page.getByText("2 adults, children")).toBeVisible();
+    await expect(page.getByText("2 Star Rating")).toBeVisible();
+
+    // too many links soo either show one of them or comment
+    // await expect(page.getByRole("link",{name:"View Details"})).toBeVisible();
+    await expect(page.getByRole("link",{name:"Add Hotel"})).toBeVisible();
+
+
+})
