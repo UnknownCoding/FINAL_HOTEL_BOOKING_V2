@@ -18,10 +18,10 @@ const GuestsSection = () => {
                     </label>
                     <label className="flex-1">
                         Child
-                        <input min={0} type="number" className="border rounded py-2 px-3 w-full" {...register("childCount",{required:"This field is required"})}/>
-                        {errors.childCount && (
+                        <input min={0} type="number" className="border rounded py-2 px-3 w-full" {...register("childCOunt",{required:"This field is required"})}/>
+                        {errors.childCOunt && (
                             <span className='text-red-500 text-sm font-bold'>
-                                {errors.childCount.message}
+                                {errors.childCOunt.message}
                             </span>
                         )}
                     </label>

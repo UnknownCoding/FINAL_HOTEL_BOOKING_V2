@@ -35,7 +35,7 @@ test("should allow user to add a hotel",async({page})=>{
     await page.getByLabel("Free Wifi").check();
     await page.getByLabel("Parking").check();
     await page.locator("[name=adultCount]").fill("1");
-    await page.locator("[name=childCount]").fill("3");
+    await page.locator("[name=childCOunt]").fill("3");
 
     await page.setInputFiles('[name="imageFiles"]',[
         path.join(__dirname,"files","1.jpg"),
@@ -60,7 +60,7 @@ test("should display hotels", async ({page})=>{
     await expect(page.getByText("Dublin, Ireland")).toBeVisible();
     await expect(page.getByText("All Inclusive")).toBeVisible();
     await expect(page.getByText("AED 119 per night")).toBeVisible();
-    await expect(page.getByText("2 adults, children")).toBeVisible();
+    await expect(page.getByText("2 adults, 1 children")).toBeVisible();
     await expect(page.getByText("2 Star Rating")).toBeVisible();
 
     // too many links soo either show one of them or comment
@@ -68,4 +68,21 @@ test("should display hotels", async ({page})=>{
     await expect(page.getByRole("link",{name:"Add Hotel"})).toBeVisible();
 
 
+})
+
+
+test("edit hotel",async ({page})=>{
+    await page.goto(`${UI_URL}/my-hotels`);
+    await page.getByRole("link",{name:"View Details"}).first().click();
+
+    await page.waitForSelector('[name="name"]',{state:"attached"});
+    await expect(page.locator('[name="name"]')).toHaveValue('Dublin Getaways');
+    await page.locator('[name="name"]').fill("Dublin Gateways Updated");
+    await page.getByRole('button',{name:'Save'}).click();
+    await expect(page.getByText("Hotel Saved!")).toBeVisible();
+
+    await page.reload();
+    await expect(page.locator('[name="name"]')).toHaveValue("Dublin Gateways Updated");
+    await page.locator('[name="name"]').fill("Dublin Getaways");
+    await page.getByRole('button',{name:'Save'}).click();
 })

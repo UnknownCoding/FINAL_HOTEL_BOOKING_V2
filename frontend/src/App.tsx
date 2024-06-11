@@ -5,6 +5,7 @@ import SignIn from './pages/SignIn'
 import { useAppContext } from './contexts/AppContext'
 import AddHotels from './pages/AddHotels'
 import MyHotels from './pages/MyHotels'
+import EditHotel from './pages/EditHotel'
 
 function App() {
   const {isLoggedIn} = useAppContext();
@@ -41,6 +42,11 @@ function App() {
               <Route path='/my-hotels' element={
                 <Layout>
                   <MyHotels/>
+                </Layout>
+              }/>
+              <Route path='/edit-hotel/:id' element={
+                <Layout>
+                  <EditHotel/>
                 </Layout>
               }/>
             </>
