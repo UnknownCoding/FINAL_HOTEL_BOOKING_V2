@@ -6,6 +6,7 @@ import authRoutes from './routes/auth';
 import cookieParser from 'cookie-parser';
 import userRouter from './routes/users';
 import hotelsRoutes from './routes/hotels';
+import hotelRoutes from "./routes/hotel";
 import path from 'path';
 import {v2 as cloudinary} from 'cloudinary';
 import { Request,Response } from 'express';
@@ -35,7 +36,8 @@ app.use(express.static(path.join(__dirname,"../../frontend/dist")));
 
 app.use("/api/users",userRouter);
 app.use("/api/auth",authRoutes);
-app.use("/api/hotels",hotelsRoutes)
+app.use("/api/hotels",hotelsRoutes);
+app.use("/api/hotel",hotelRoutes);
 
 // catch all routes , some of our routes are in conditional logic so wont be part of our static files !
 app.get('*',(req:Request,res:Response)=>{
