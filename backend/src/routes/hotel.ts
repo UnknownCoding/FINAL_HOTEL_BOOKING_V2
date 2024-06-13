@@ -1,17 +1,19 @@
 import Hotel from "../models/hotels";
 import express, { Request, Response } from "express"
 import { HotelSearchResponse } from "../shared/types";
+import { param, validationResult } from "express-validator";
 
 const router = express.Router();
 
+
 router.get("/search",async (req:Request,res:Response)=>{
     try {
+
         const pageSize = 5;
         const pageNumber = parseInt(req.query.page ? req.query.page.toString() : "1");
         const skip = (pageNumber-1) *pageSize;
         
         const query = constructQuery(req.query);
-
         let sortOptions = {};
         switch(req.query.sortOptions){
             case "starRating":
@@ -98,5 +100,21 @@ const constructQuery = (queryParams:any) => {
     return constructQuery
 
 }
+
+router.get("/:id",[param("id").notEmpty().withMessage("Hotel ID is required")],async(req:Request,res:Response)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json({ok:false,errors:errors.array()})
+    };
+    const id = req.params.id;
+    try {
+        const hotel = await Hotel.findById(id);
+        res.status(201).json({hotel,ok:true});
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({errors:errors.array(),ok:false});
+    }
+})
+
 
 export default router
