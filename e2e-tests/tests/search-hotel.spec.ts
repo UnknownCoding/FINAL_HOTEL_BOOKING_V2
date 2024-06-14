@@ -30,8 +30,7 @@ test("Should show a new hotel with the search results", async ({page}) => {
 
     await expect(page.getByText("1 Hotels found in Dublin")).toBeVisible();
     await expect(page.getByText("Dublin Getaways")).toBeVisible();
-
-<<<<<<< HEAD
+})
 
 test("Should show hotel detail",async ({page})=>{
     await page.goto(UI_URL);
@@ -70,6 +69,4 @@ test("should book hotel" , async ({page})=>{
 
     await page.getByRole("button",{name:"Confirm Booking"}).click();
     await expect(page.getByText("Booking Saved")).toBeVisible();
-=======
->>>>>>> parent of ee60405 (added details page for individual hotels and e2e testing)
 })

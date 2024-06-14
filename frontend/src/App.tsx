@@ -7,11 +7,7 @@ import AddHotels from './pages/AddHotels'
 import MyHotels from './pages/MyHotels'
 import EditHotel from './pages/EditHotel'
 import Search from './pages/Search'
-<<<<<<< HEAD
-import Details from './pages/Details'
 import Booking from './pages/Booking'
-=======
->>>>>>> parent of ee60405 (added details page for individual hotels and e2e testing)
 
 function App() {
   const {isLoggedIn} = useAppContext();
