@@ -1,9 +1,13 @@
 import Hotel from "../models/hotels";
 import express, { Request, Response } from "express"
+<<<<<<< HEAD
 import { BookingType, HotelSearchResponse } from "../shared/types";
 import { param, validationResult } from "express-validator";
 import Stripe from "stripe";
 import verifyToken from "../middleware/auth";
+=======
+import { HotelSearchResponse } from "../shared/types";
+>>>>>>> parent of ee60405 (added details page for individual hotels and e2e testing)
 
 const router = express.Router();
 const stripe = new Stripe(process.env.STRIPE_API_KEY as string);
@@ -11,15 +15,14 @@ const stripe = new Stripe(process.env.STRIPE_API_KEY as string);
 
 
 
-
 router.get("/search",async (req:Request,res:Response)=>{
     try {
-
         const pageSize = 5;
         const pageNumber = parseInt(req.query.page ? req.query.page.toString() : "1");
         const skip = (pageNumber-1) *pageSize;
         
         const query = constructQuery(req.query);
+
         let sortOptions = {};
         switch(req.query.sortOptions){
             case "starRating":
@@ -107,6 +110,7 @@ const constructQuery = (queryParams:any) => {
 
 }
 
+<<<<<<< HEAD
 router.get("/:id",[param("id").notEmpty().withMessage("Hotel ID is required")],async(req:Request,res:Response)=>{
     const errors = validationResult(req);
     if(!errors.isEmpty()){
@@ -192,4 +196,6 @@ router.post("/:hotelId/bookings/payment-intent",verifyToken,async (req:Request,r
 
 
 
+=======
+>>>>>>> parent of ee60405 (added details page for individual hotels and e2e testing)
 export default router

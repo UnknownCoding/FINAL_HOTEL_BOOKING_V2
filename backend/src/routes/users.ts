@@ -1,4 +1,5 @@
 import express , {Request,Response} from "express";
+// @ts-expect-error
 import User from "../models/user";
 import jwt from "jsonwebtoken";
 import {check,validationResult} from "express-validator";

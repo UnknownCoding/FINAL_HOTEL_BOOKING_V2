@@ -157,6 +157,7 @@ export const searchHotel = async (searchParams:SearchParams) => {
         throw new Error("Error fetching the hotels");
     };
     return (res as HotelSearchResponse)
+<<<<<<< HEAD
 }
 
 export const fetchHotelById = async (hotelId:string) => {
@@ -214,4 +215,6 @@ export const createRoomBooking  = async (formData:BookingFormData) => {
         throw new Error("error booking room");
     }
 
+=======
+>>>>>>> parent of ee60405 (added details page for individual hotels and e2e testing)
 }
