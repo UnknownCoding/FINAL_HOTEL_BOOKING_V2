@@ -1,6 +1,8 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInData } from "./pages/SignIn";
-import {HotelSearchResponse, HotelType} from "../../backend/src/shared/types"
+import {HotelSearchResponse, HotelType, PaymentIntentResponse} from "../../backend/src/shared/types";
+import {UserType} from "../../backend/src/models/user";
+import { BookingFormData } from "./form/BookingForm/BookingForm";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -168,4 +170,48 @@ export const fetchHotelById = async (hotelId:string) => {
     };
 
     return (res.hotel as HotelType); 
+}
+
+export const fethcCurrentUser = async () => {
+    const response = await fetch(`${API_BASE_URL}/api/users/me`,{
+        credentials:"include",
+        method:"GET"
+    });
+    const res = await response.json();
+    if(!res.ok){
+        throw new Error("Error fetching current user");
+    }
+    return (res.user as UserType)
+}
+
+export const createPaymentIntent = async (hotelId:string,numberOfNights:string) => {
+    const response = await fetch(`${API_BASE_URL}/api/hotel/${hotelId}/bookings/payment-intent`,{
+        credentials:"include",
+        method:"POST",
+        body:JSON.stringify({
+            numberOfNights
+        }),
+        headers:{
+            "Content-Type":"application/json"
+        }
+    });
+    const res = await response.json();
+    if(!res.ok){
+        throw new Error("error creating the payment intent");
+    }
+    return res.response as PaymentIntentResponse
+}
+
+export const createRoomBooking  = async (formData:BookingFormData) => {
+    const response = await fetch(`${API_BASE_URL}/api/hotel/${formData.hotelId}/bookings`,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(formData),
+        credentials:"include",
+    });
+    const res = await response.json();
+    if(!res.ok){
+        throw new Error("error booking room");
+    }
+
 }
