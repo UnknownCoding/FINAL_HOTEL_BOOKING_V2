@@ -13,6 +13,7 @@ export interface HotelType{
     starRating:number;
     imageUrls:string[];
     lastUpdated:Date;
+    bookings:BookingType[];
 }
 
 
@@ -24,4 +25,24 @@ export interface HotelSearchResponse{
         pages:number,
     };
     ok:boolean
+}
+
+export type BookingType = {
+    _id:string;
+    userId:string;
+    firstName:string;
+    lastName:string;
+    email:string;
+    adultCount:number;
+    childCount:number;
+    checkIn:Date;
+    checkOut:Date;
+    totalCost:number;
+}
+
+
+export interface PaymentIntentResponse{
+    paymentIntentId:string;
+    clientSecret:string;
+    totalCost:number;
 }
